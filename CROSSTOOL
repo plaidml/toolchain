@@ -1,0 +1,339 @@
+major_version: "local"
+minor_version: ""
+default_target_cpu: "same_as_host"
+
+default_toolchain {
+  cpu: "linux_arm_32v7"
+  toolchain_identifier: "gcc-linux_arm_32v7"
+}
+
+default_toolchain {
+  cpu: "linux_arm_64v8"
+  toolchain_identifier: "gcc-linux_arm_64v8"
+}
+
+default_toolchain {
+  cpu: "linux_x86_64"
+  toolchain_identifier: "gcc-linux_x86_64"
+}
+
+toolchain {
+  abi_version: "local"
+  abi_libc_version: "glibc_2.19"
+  builtin_sysroot: ""
+  compiler: "gcc"
+  host_system_name: "linux_x86_64"
+  needsPic: true
+  supports_normalizing_ar: true
+  target_libc: "glibc_2.19"
+  target_cpu: "linux_arm_32v7"
+  target_system_name: "linux_arm_32v7"
+  toolchain_identifier: "gcc-linux_arm_32v7"
+
+  tool_path { name: "ar" path: "crosstool_ng/linux_arm_32v7/wrappers/ar" }
+  tool_path { name: "compat-ld" path: "crosstool_ng/linux_arm_32v7/wrappers/ld" }
+  tool_path { name: "cpp" path: "crosstool_ng/linux_arm_32v7/wrappers/cpp" }
+  tool_path { name: "gcc" path: "crosstool_ng/linux_arm_32v7/wrappers/gcc" }
+  tool_path { name: "gcov" path: "crosstool_ng/linux_arm_32v7/wrappers/gcov" }
+  tool_path { name: "ld" path: "crosstool_ng/linux_arm_32v7/wrappers/ld" }
+  tool_path { name: "nm" path: "crosstool_ng/linux_arm_32v7/wrappers/nm" }
+  tool_path { name: "objcopy" path: "crosstool_ng/linux_arm_32v7/wrappers/objcopy" }
+  tool_path { name: "objdump" path: "crosstool_ng/linux_arm_32v7/wrappers/objdump" }
+  tool_path { name: "strip" path: "crosstool_ng/linux_arm_32v7/wrappers/strip" }
+
+  objcopy_embed_flag: "-I"
+  objcopy_embed_flag: "binary"
+
+  compiler_flag: "--sysroot=external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/sysroot/"
+  compiler_flag: "-mfloat-abi=hard"
+
+  compiler_flag: "-nostdinc"
+  compiler_flag: "-iprefix"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/lib/gcc/arm-unknown-linux-gnueabihf/4.8.5/"
+  compiler_flag: "-isysroot"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/sysroot"
+
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/include/c++/4.8.5"
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/include/c++/4.8.5/arm-unknown-linux-gnueabihf"
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/include/c++/4.8.5/backward"
+
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/lib/gcc/arm-unknown-linux-gnueabihf/4.8.5/include"
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/lib/gcc/arm-unknown-linux-gnueabihf/4.8.5/include-fixed"
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/sysroot/usr/include"
+
+  cxx_flag: "-std=c++1y"
+
+  linker_flag: "-lstdc++"
+
+  # Make C++ compilation deterministic. Use linkstamping instead of these
+  # compiler symbols.
+  unfiltered_cxx_flag: "-Wno-builtin-macro-redefined"
+  unfiltered_cxx_flag: "-D__DATE__=\"redacted\""
+  unfiltered_cxx_flag: "-D__TIMESTAMP__=\"redacted\""
+  unfiltered_cxx_flag: "-D__TIME__=\"redacted\""
+
+  # Security hardening on by default.
+  # Conservative choice; -D_FORTIFY_SOURCE=2 may be unsafe in some cases.
+  # We need to undef it before redefining it as some distributions now have
+  # it enabled by default.
+  compiler_flag: "-U_FORTIFY_SOURCE"
+  compiler_flag: "-fstack-protector"
+  compiler_flag: "-fPIE"
+  linker_flag: "-pie"
+  linker_flag: "-Wl,-z,relro,-z,now"
+
+  # All warnings are enabled. Maybe enable -Werror as well?
+  compiler_flag: "-Wall"
+  compiler_flag: "-Wno-error=pragmas"
+  compiler_flag: "-Wno-unknown-pragmas"
+
+  # Keep stack frames for debugging, even in opt mode.
+  compiler_flag: "-fno-omit-frame-pointer"
+
+  compilation_mode_flags {
+    mode: DBG
+    # Enable debug symbols.
+    compiler_flag: "-g"
+  }
+  compilation_mode_flags {
+    mode: OPT
+
+    # No debug symbols.
+    # Maybe we should enable https://gcc.gnu.org/wiki/DebugFission for opt or
+    # even generally? However, that can't happen here, as it requires special
+    # handling in Bazel.
+    compiler_flag: "-g0"
+
+    # Conservative choice for -O
+    # -O3 can increase binary size and even slow down the resulting binaries.
+    # Profile first and / or use FDO if you need better performance than this.
+    compiler_flag: "-O2"
+
+    # Disable assertions
+    compiler_flag: "-DNDEBUG"
+
+    # Removal of unused code and data at link time (can this increase binary size in some cases?).
+    compiler_flag: "-ffunction-sections"
+    compiler_flag: "-fdata-sections"
+    linker_flag: "-Wl,--gc-sections"
+  }
+}
+
+toolchain {
+  abi_version: "local"
+  abi_libc_version: "glibc_2.19"
+  builtin_sysroot: ""
+  compiler: "gcc"
+  host_system_name: "linux_x86_64"
+  needsPic: true
+  supports_normalizing_ar: true
+  target_libc: "glibc_2.19"
+  target_cpu: "linux_arm_64v8"
+  target_system_name: "linux_arm_64v8"
+  toolchain_identifier: "gcc-linux_arm_64v8"
+
+  tool_path { name: "ar" path: "crosstool_ng/linux_arm_64v8/wrappers/ar" }
+  tool_path { name: "compat-ld" path: "crosstool_ng/linux_arm_64v8/wrappers/ld" }
+  tool_path { name: "cpp" path: "crosstool_ng/linux_arm_64v8/wrappers/cpp" }
+  tool_path { name: "gcc" path: "crosstool_ng/linux_arm_64v8/wrappers/gcc" }
+  tool_path { name: "gcov" path: "crosstool_ng/linux_arm_64v8/wrappers/gcov" }
+  tool_path { name: "ld" path: "crosstool_ng/linux_arm_64v8/wrappers/ld" }
+  tool_path { name: "nm" path: "crosstool_ng/linux_arm_64v8/wrappers/nm" }
+  tool_path { name: "objcopy" path: "crosstool_ng/linux_arm_64v8/wrappers/objcopy" }
+  tool_path { name: "objdump" path: "crosstool_ng/linux_arm_64v8/wrappers/objdump" }
+  tool_path { name: "strip" path: "crosstool_ng/linux_arm_64v8/wrappers/strip" }
+
+  objcopy_embed_flag: "-I"
+  objcopy_embed_flag: "binary"
+
+  compiler_flag: "--sysroot=external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/sysroot/"
+
+  compiler_flag: "-nostdinc"
+  compiler_flag: "-iprefix"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/lib/gcc/aarch64-unknown-linux-gnueabi/4.8.5/"
+  compiler_flag: "-isysroot"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/sysroot"
+
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/include/c++/4.8.5"
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/include/c++/4.8.5/aarch64-unknown-linux-gnueabi"
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/include/c++/4.8.5/backward"
+
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/lib/gcc/aarch64-unknown-linux-gnueabi/4.8.5/include"
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/lib/gcc/aarch64-unknown-linux-gnueabi/4.8.5/include-fixed"
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/sysroot/usr/include"
+
+  cxx_flag: "-std=c++1y"
+
+  linker_flag: "-lstdc++"
+
+  # Make C++ compilation deterministic. Use linkstamping instead of these
+  # compiler symbols.
+  unfiltered_cxx_flag: "-Wno-builtin-macro-redefined"
+  unfiltered_cxx_flag: "-D__DATE__=\"redacted\""
+  unfiltered_cxx_flag: "-D__TIMESTAMP__=\"redacted\""
+  unfiltered_cxx_flag: "-D__TIME__=\"redacted\""
+
+  # Security hardening on by default.
+  # Conservative choice; -D_FORTIFY_SOURCE=2 may be unsafe in some cases.
+  # We need to undef it before redefining it as some distributions now have
+  # it enabled by default.
+  compiler_flag: "-U_FORTIFY_SOURCE"
+  compiler_flag: "-fPIE"
+  linker_flag: "-pie"
+  linker_flag: "-Wl,-z,relro,-z,now"
+
+  # All warnings are enabled. Maybe enable -Werror as well?
+  compiler_flag: "-Wall"
+  compiler_flag: "-Wno-error=pragmas"
+  compiler_flag: "-Wno-unknown-pragmas"
+
+  # Keep stack frames for debugging, even in opt mode.
+  compiler_flag: "-fno-omit-frame-pointer"
+
+  compilation_mode_flags {
+    mode: DBG
+    # Enable debug symbols.
+    compiler_flag: "-g"
+  }
+  compilation_mode_flags {
+    mode: OPT
+
+    # No debug symbols.
+    # Maybe we should enable https://gcc.gnu.org/wiki/DebugFission for opt or
+    # even generally? However, that can't happen here, as it requires special
+    # handling in Bazel.
+    compiler_flag: "-g0"
+
+    # Conservative choice for -O
+    # -O3 can increase binary size and even slow down the resulting binaries.
+    # Profile first and / or use FDO if you need better performance than this.
+    compiler_flag: "-O2"
+
+    # Disable assertions
+    compiler_flag: "-DNDEBUG"
+
+    # Removal of unused code and data at link time (can this increase binary size in some cases?).
+    compiler_flag: "-ffunction-sections"
+    compiler_flag: "-fdata-sections"
+    linker_flag: "-Wl,--gc-sections"
+  }
+}
+
+toolchain {
+  abi_version: "local"
+  abi_libc_version: "glibc_2.19"
+  builtin_sysroot: ""
+  compiler: "gcc"
+  host_system_name: "linux_x86_64"
+  needsPic: true
+  supports_normalizing_ar: true
+  target_libc: "glibc_2.19"
+  target_cpu: "linux_x86_64"
+  target_system_name: "linux_x86_64"
+  toolchain_identifier: "gcc-linux_x86_64"
+
+  tool_path { name: "ar" path: "crosstool_ng/linux_x86_64/wrappers/ar" }
+  tool_path { name: "compat-ld" path: "crosstool_ng/linux_x86_64/wrappers/ld" }
+  tool_path { name: "cpp" path: "crosstool_ng/linux_x86_64/wrappers/cpp" }
+  tool_path { name: "gcc" path: "crosstool_ng/linux_x86_64/wrappers/gcc" }
+  tool_path { name: "gcov" path: "crosstool_ng/linux_x86_64/wrappers/gcov" }
+  tool_path { name: "ld" path: "crosstool_ng/linux_x86_64/wrappers/ld" }
+  tool_path { name: "nm" path: "crosstool_ng/linux_x86_64/wrappers/nm" }
+  tool_path { name: "objcopy" path: "crosstool_ng/linux_x86_64/wrappers/objcopy" }
+  tool_path { name: "objdump" path: "crosstool_ng/linux_x86_64/wrappers/objdump" }
+  tool_path { name: "strip" path: "crosstool_ng/linux_x86_64/wrappers/strip" }
+
+  objcopy_embed_flag: "-I"
+  objcopy_embed_flag: "binary"
+
+  compiler_flag: "--sysroot=external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/sysroot/"
+
+  compiler_flag: "-nostdinc"
+  compiler_flag: "-iprefix"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/lib/gcc/x86_64-unknown-linux-gnu/4.8.5/"
+  compiler_flag: "-isysroot"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/sysroot"
+
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/include/c++/4.8.5"
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/include/c++/4.8.5/x86_64-unknown-linux-gnu"
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/include/c++/4.8.5/backward"
+
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/lib/gcc/x86_64-unknown-linux-gnu/4.8.5/include"
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/lib/gcc/x86_64-unknown-linux-gnu/4.8.5/include-fixed"
+  compiler_flag: "-isystem"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/sysroot/usr/include"
+
+  cxx_flag: "-std=c++1y"
+
+  linker_flag: "-lstdc++"
+
+  # Make C++ compilation deterministic. Use linkstamping instead of these
+  # compiler symbols.
+  unfiltered_cxx_flag: "-Wno-builtin-macro-redefined"
+  unfiltered_cxx_flag: "-D__DATE__=\"redacted\""
+  unfiltered_cxx_flag: "-D__TIMESTAMP__=\"redacted\""
+  unfiltered_cxx_flag: "-D__TIME__=\"redacted\""
+
+  # Security hardening on by default.
+  # Conservative choice; -D_FORTIFY_SOURCE=2 may be unsafe in some cases.
+  # We need to undef it before redefining it as some distributions now have
+  # it enabled by default.
+  compiler_flag: "-U_FORTIFY_SOURCE"
+  compiler_flag: "-fstack-protector"
+  compiler_flag: "-fPIE"
+  linker_flag: "-pie"
+  linker_flag: "-Wl,-z,relro,-z,now"
+
+  # All warnings are enabled. Maybe enable -Werror as well?
+  compiler_flag: "-Wall"
+  compiler_flag: "-Wno-error=pragmas"
+  compiler_flag: "-Wno-unknown-pragmas"
+
+  # Keep stack frames for debugging, even in opt mode.
+  compiler_flag: "-fno-omit-frame-pointer"
+
+  compilation_mode_flags {
+    mode: DBG
+    # Enable debug symbols.
+    compiler_flag: "-g"
+  }
+  compilation_mode_flags {
+    mode: OPT
+
+    # No debug symbols.
+    # Maybe we should enable https://gcc.gnu.org/wiki/DebugFission for opt or
+    # even generally? However, that can't happen here, as it requires special
+    # handling in Bazel.
+    compiler_flag: "-g0"
+
+    # Conservative choice for -O
+    # -O3 can increase binary size and even slow down the resulting binaries.
+    # Profile first and / or use FDO if you need better performance than this.
+    compiler_flag: "-O2"
+
+    # Disable assertions
+    compiler_flag: "-DNDEBUG"
+
+    # Removal of unused code and data at link time (can this increase binary size in some cases?).
+    compiler_flag: "-ffunction-sections"
+    compiler_flag: "-fdata-sections"
+    linker_flag: "-Wl,--gc-sections"
+  }
+}

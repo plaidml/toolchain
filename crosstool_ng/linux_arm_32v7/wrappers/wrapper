@@ -1,0 +1,9 @@
+#!/bin/bash --norc
+
+ROOT="external/crosstool_ng_linux_arm_32v7"
+PREFIX="arm-unknown-linux-gnueabihf"
+TOOL=$(basename $0)
+
+export PATH=$ROOT/bin:$PATH
+
+exec -a $PREFIX-$TOOL $ROOT/bin/$PREFIX-$TOOL "$@"
