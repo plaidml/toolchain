@@ -18,7 +18,7 @@ config_setting(
 
 config_setting(
     name = "macos_x86_64",
-    values = {"cpu": "darwin"},
+    values = {"cpu": "darwin_x86_64"},
     visibility = ["//visibility:public"],
 )
 
