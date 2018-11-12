@@ -18,7 +18,7 @@ def repositories():
     native.new_http_archive(
         name = "crosstool_ng_linux_x86_64",
         build_file = str(Label("//:crosstool_ng/linux_x86_64.BUILD")),
-        sha256 = "3ae08e1424ad095ac190c21a5b4e82e221378f9dac6f2f277f518add1c55b558",
+        sha256 = "069d7cf27213d7bd0338f6e4b7b03b29946cc61b049d1c26ccaffbecdcc00dc9",
         strip_prefix = "x86_64-unknown-linux-gnu",
-        url = "https://storage.googleapis.com/vertexai-depot/x86_64-unknown-linux-gnu.tgz",
+        url = "https://storage.googleapis.com/vertexai-depot/toolchain/gcc-5.5/x86_64-unknown-linux-gnu.tgz",
     )
