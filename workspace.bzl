@@ -1,5 +1,7 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 def repositories():
-    native.new_http_archive(
+    http_archive(
         name = "crosstool_ng_linux_arm_32v7",
         build_file = str(Label("//:crosstool_ng/linux_arm_32v7.BUILD")),
         sha256 = "f3f6bc5d11710bb1a63966c76430e7908ecf40227e6e76a93ae53f3ecd64a2d2",
@@ -7,7 +9,7 @@ def repositories():
         url = "https://storage.googleapis.com/vertexai-depot/arm-unknown-linux-gnueabihf.tgz",
     )
 
-    native.new_http_archive(
+    http_archive(
         name = "crosstool_ng_linux_arm_64v8",
         build_file = str(Label("//:crosstool_ng/linux_arm_64v8.BUILD")),
         sha256 = "14ad5794e8ffc1a449ae8d83b80d0647363a53ca166959dbf2224f53c2296e0b",
@@ -15,7 +17,7 @@ def repositories():
         url = "https://storage.googleapis.com/vertexai-depot/aarch64-unknown-linux-gnueabi.tgz",
     )
 
-    native.new_http_archive(
+    http_archive(
         name = "crosstool_ng_linux_x86_64",
         build_file = str(Label("//:crosstool_ng/linux_x86_64.BUILD")),
         sha256 = "d16603d1ad9814922e9978995ef9424140c8e0e064f7e75c4a93a03fdcfa8f5e",

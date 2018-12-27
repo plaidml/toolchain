@@ -35,6 +35,7 @@ cc_toolchain_suite(
         "linux_arm_32v7|gcc": ":cc-linux_arm_32v7",
         "linux_arm_64v8|gcc": ":cc-linux_arm_64v8",
         "linux_x86_64|gcc": ":cc-linux_x86_64",
+        "linux_x86_64": ":cc-linux_x86_64",
     },
 )
 
