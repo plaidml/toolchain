@@ -19,13 +19,13 @@ default_toolchain {
 
 toolchain {
   abi_version: "local"
-  abi_libc_version: "glibc_2.19"
+  abi_libc_version: "glibc_2.23"
   builtin_sysroot: ""
   compiler: "gcc"
   host_system_name: "linux_x86_64"
   needsPic: true
   supports_normalizing_ar: true
-  target_libc: "glibc_2.19"
+  target_libc: "glibc_2.23"
   target_cpu: "linux_arm_32v7"
   target_system_name: "linux_arm_32v7"
   toolchain_identifier: "gcc-linux_arm_32v7"
@@ -49,21 +49,21 @@ toolchain {
 
   compiler_flag: "-nostdinc"
   compiler_flag: "-iprefix"
-  compiler_flag: "external/crosstool_ng_linux_arm_32v7/lib/gcc/arm-unknown-linux-gnueabihf/4.8.5/"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/lib/gcc/arm-unknown-linux-gnueabihf/6.5.0/"
   compiler_flag: "-isysroot"
   compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/sysroot"
 
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/include/c++/4.8.5"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/include/c++/6.5.0"
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/include/c++/4.8.5/arm-unknown-linux-gnueabihf"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/include/c++/6.5.0/arm-unknown-linux-gnueabihf"
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/include/c++/4.8.5/backward"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/include/c++/6.5.0/backward"
 
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_arm_32v7/lib/gcc/arm-unknown-linux-gnueabihf/4.8.5/include"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/lib/gcc/arm-unknown-linux-gnueabihf/6.5.0/include"
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_arm_32v7/lib/gcc/arm-unknown-linux-gnueabihf/4.8.5/include-fixed"
+  compiler_flag: "external/crosstool_ng_linux_arm_32v7/lib/gcc/arm-unknown-linux-gnueabihf/6.5.0/include-fixed"
   compiler_flag: "-isystem"
   compiler_flag: "external/crosstool_ng_linux_arm_32v7/arm-unknown-linux-gnueabihf/sysroot/usr/include"
 
@@ -127,13 +127,13 @@ toolchain {
 
 toolchain {
   abi_version: "local"
-  abi_libc_version: "glibc_2.19"
+  abi_libc_version: "glibc_2.23"
   builtin_sysroot: ""
   compiler: "gcc"
   host_system_name: "linux_x86_64"
   needsPic: true
   supports_normalizing_ar: true
-  target_libc: "glibc_2.19"
+  target_libc: "glibc_2.23"
   target_cpu: "linux_arm_64v8"
   target_system_name: "linux_arm_64v8"
   toolchain_identifier: "gcc-linux_arm_64v8"
@@ -156,21 +156,21 @@ toolchain {
 
   compiler_flag: "-nostdinc"
   compiler_flag: "-iprefix"
-  compiler_flag: "external/crosstool_ng_linux_arm_64v8/lib/gcc/aarch64-unknown-linux-gnueabi/4.8.5/"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/lib/gcc/aarch64-unknown-linux-gnueabi/6.5.0/"
   compiler_flag: "-isysroot"
   compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/sysroot"
 
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/include/c++/4.8.5"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/include/c++/6.5.0"
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/include/c++/4.8.5/aarch64-unknown-linux-gnueabi"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/include/c++/6.5.0/aarch64-unknown-linux-gnueabi"
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/include/c++/4.8.5/backward"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/include/c++/6.5.0/backward"
 
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_arm_64v8/lib/gcc/aarch64-unknown-linux-gnueabi/4.8.5/include"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/lib/gcc/aarch64-unknown-linux-gnueabi/6.5.0/include"
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_arm_64v8/lib/gcc/aarch64-unknown-linux-gnueabi/4.8.5/include-fixed"
+  compiler_flag: "external/crosstool_ng_linux_arm_64v8/lib/gcc/aarch64-unknown-linux-gnueabi/6.5.0/include-fixed"
   compiler_flag: "-isystem"
   compiler_flag: "external/crosstool_ng_linux_arm_64v8/aarch64-unknown-linux-gnueabi/sysroot/usr/include"
 
