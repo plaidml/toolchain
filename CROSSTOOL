@@ -262,21 +262,21 @@ toolchain {
 
   compiler_flag: "-nostdinc"
   compiler_flag: "-iprefix"
-  compiler_flag: "external/crosstool_ng_linux_x86_64/lib/gcc/x86_64-unknown-linux-gnu/6.3.0/"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/lib/gcc/x86_64-unknown-linux-gnu/5.4.0/"
   compiler_flag: "-isysroot"
   compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/sysroot"
 
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/include/c++/6.3.0"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/include/c++/5.4.0"
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/include/c++/6.3.0/x86_64-unknown-linux-gnu"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/include/c++/5.4.0/x86_64-unknown-linux-gnu"
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/include/c++/6.3.0/backward"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/include/c++/5.4.0/backward"
 
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_x86_64/lib/gcc/x86_64-unknown-linux-gnu/6.3.0/include"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/lib/gcc/x86_64-unknown-linux-gnu/5.4.0/include"
   compiler_flag: "-isystem"
-  compiler_flag: "external/crosstool_ng_linux_x86_64/lib/gcc/x86_64-unknown-linux-gnu/6.3.0/include-fixed"
+  compiler_flag: "external/crosstool_ng_linux_x86_64/lib/gcc/x86_64-unknown-linux-gnu/5.4.0/include-fixed"
   compiler_flag: "-isystem"
   compiler_flag: "external/crosstool_ng_linux_x86_64/x86_64-unknown-linux-gnu/sysroot/usr/include"
 
